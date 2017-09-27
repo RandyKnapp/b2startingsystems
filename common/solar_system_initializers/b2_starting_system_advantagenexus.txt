@@ -1,0 +1,322 @@
+##################################################################################
+# Bravo2's Starting Systems - Advantage + Nexus
+##################################################################################
+
+@asteroids = 120
+@asteroids_back = -100
+@distance = 50
+@base_moon_distance = 10
+
+# Advantage Start + Nexus (Better than average start, plus a nearby ruined science nexus)
+##################################################################################
+b2_starting_system_advantage_nexus = {
+	class = "rl_standard_stars"
+	asteroids_distance = @asteroids
+	usage = custom_empire
+	flags = { empire_home_system }
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Star
+	planet = {
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+
+		init_effect = {
+			orbital_deposit_tile = {
+				clear_deposits = yes
+			}
+		}
+	}
+
+	change_orbit = @asteroids
+
+	# No-resource Asteroids
+	planet = {
+		count = { min = 0 max = 2 }
+		class = random_asteroid
+		orbit_distance = 0
+		orbit_angle = { min = 40 max = 100 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				clear_deposits = yes
+			}
+		}
+	}
+
+	# Minerals Asteroid
+	planet = {
+		count = 1
+		class = random_asteroid
+		orbit_distance = 0
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_vast_mineral_deposit
+			}
+		}
+	}
+
+	change_orbit = @asteroids_back
+
+	# Other Inner Planets
+	planet = {
+		count = { min = 0 max = 2 }
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 10 max = 15 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				clear_deposits = yes
+			}
+		}
+	}
+
+	# Energy Planet
+	planet = {
+		count = { min = 1 max = 2 }
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 15 max = 25 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_vast_energy_deposit
+			}
+		}
+	}
+
+	# Home Planet
+	planet = {
+		count = 1
+		orbit_distance = { min = 20 max = 30 }
+		home_planet = yes
+		class = ideal_planet_class
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+		tile_blockers = none
+		modifiers = none
+
+		init_effect = {
+			prevent_anomaly = yes
+			generate_start_buildings_and_blockers = yes
+		}
+		
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = { min = 0 max = 2 }
+			class = random_non_colonizable
+			size = { min = 4 max = 8 }
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+
+			init_effect = {
+				orbital_deposit_tile = {
+					clear_deposits = yes
+				}
+			}
+		}
+	}
+
+	change_orbit = 60
+
+	# Science Gas Giant
+	planet = {
+		count = { min = 0 max = 2 }
+		class = pc_gas_giant
+		orbit_distance = { min = 15 max = 25 }
+		orbit_angle = { min = 90 max = 270 }
+		has_ring = yes
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = 1
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_rich_physics_deposit
+				}
+			}
+		}
+
+		moon = {
+			count = 1
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_rich_society_deposit
+				}
+			}
+		}
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_rich_engineering_deposit
+			}
+		}
+	}
+
+	# Other Gas Giants
+	planet = {
+		count = { min = 0 max = 2 }
+		class = pc_gas_giant
+		orbit_distance = { min = 15 max = 25 }
+		orbit_angle = { min = 90 max = 270 }
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = { min = 0 max = 3 }
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+
+			init_effect = {
+				orbital_deposit_tile = {
+					clear_deposits = yes
+				}
+			}
+		}
+
+		init_effect = {
+			orbital_deposit_tile = {
+				clear_deposits = yes
+			}
+		}
+	}
+
+	# Neighbors
+	neighbor_system = {
+		distance = { min = 10 max = @distance }
+		initializer = "b2_starting_system_advantage_nexus_neighbor_a1"
+	}
+
+	neighbor_system = {
+		distance = { min = 10 max = @distance }	
+		initializer = "b2_starting_system_advantage_neighbor_b1"
+	}
+}
+
+# Neighbors
+##################################################################################
+b2_starting_system_advantage_nexus_neighbor_a1 = {
+	class = rl_standard_stars
+	asteroids_distance = 50
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Star
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_rich_energy_deposit
+			}
+		}
+	}
+
+	change_orbit = 50
+
+	# Asteroids
+	planet = {
+		count = 2
+		class = random_asteroid
+		orbit_distance = 0
+		orbit_angle = { min = 15 max = 110 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_rich_mineral_deposit
+			}
+		}
+	}
+
+	change_orbit = -10
+
+	# Random Planets
+	planet = {
+		count = { min = 0 max = 5 }
+		class = random_non_colonizable
+		orbit_distance = { min = 20 max = 40 }
+		orbit_angle = { min = 15 max = 110 }
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = { min = 0 max = 2 }
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+
+			init_effect = {
+				orbital_deposit_tile = {
+					clear_deposits = yes
+				}
+			}
+		}
+
+		init_effect = {
+			orbital_deposit_tile = {
+				clear_deposits = yes
+			}
+		}
+	}
+
+	planet = {
+		class = random_non_colonizable
+		orbit_angle = { min = 40 max = 140 }
+		orbit_distance = { min = 60 max = 100 }
+		size = 30
+		
+		init_effect = {
+			save_event_target_as = nexus_planet
+		}
+	}
+	
+	init_effect = {
+		spawn_megastructure = { 
+			type = "think_tank_ruined" 
+			location = event_target:nexus_planet
+		}
+	}
+
+	# Neighbors
+	neighbor_system = {
+		distance = { min = 10 max = @distance }
+		initializer = "b2_starting_system_advantage_neighbor_a2"
+	}
+}
