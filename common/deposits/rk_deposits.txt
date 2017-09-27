@@ -1,0 +1,34 @@
+##################################################################################
+# Bravo2's Starting Systems - Deposits
+##################################################################################
+
+rk_zro_deposit_force = {
+	resources = { 
+		society_research = 2
+		physics_research = 2
+		sr_zro = 1
+	}
+	station = shipclass_research_station
+	orbital_weight = {
+		weight = 200
+	}
+	
+	drop_weight = {
+		weight = 1
+	}
+}
+
+rk_living_metal_deposit_force {
+	resources = { 
+		engineering_research = 5
+		sr_living_metal = 1
+	}
+	station = shipclass_research_station
+	orbital_weight = {
+		weight = 100
+	}
+	
+	drop_weight = {
+		weight = 1
+	}
+}

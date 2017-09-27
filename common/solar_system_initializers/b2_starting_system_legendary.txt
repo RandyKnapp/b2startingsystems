@@ -1,0 +1,517 @@
+##################################################################################
+# Bravo2's Starting Systems - Legendary
+##################################################################################
+
+@asteroids = 150
+@asteroids_back = -120
+@distance = 50
+@base_moon_distance = 10
+
+# Legendary Start
+##################################################################################
+b2_starting_system_legendary = {
+	class = "rl_standard_stars"
+	asteroids_distance = @asteroids
+	usage = custom_empire
+	flags = { empire_home_system }
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Star
+	planet = {
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+
+	change_orbit = @asteroids
+
+	# Minerals Asteroid
+	planet = {
+		count = 3
+		class = random_asteroid
+		orbit_distance = 0
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_mineral_deposit
+			}
+		}
+	}
+
+	change_orbit = @asteroids_back
+
+	# Energy Planets
+	planet = {
+		count = 1
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 10 max = 15 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+
+	# Mineral Planets
+	planet = {
+		count = 3
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 15 max = 25 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_mineral_deposit
+			}
+
+			add_modifier = {
+				modifier = "chthonian_planet"
+			}
+		}
+	}
+
+	# Home Planet
+	planet = {
+		count = 1
+		orbit_distance = { min = 20 max = 30 }
+		home_planet = yes
+		starting_planet = yes
+		class = ideal_planet_class
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+
+		init_effect = {
+			prevent_anomaly = yes
+			generate_start_buildings_and_blockers = yes
+			clear_blockers = yes
+		}
+	}
+
+	change_orbit = 60
+
+	# Science Gas Giant
+	planet = {
+		count = 3
+		class = pc_gas_giant
+		orbit_distance = { min = 40 max = 50 }
+		orbit_angle = { min = 90 max = 180 }
+		has_ring = yes
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_society_deposit
+				}
+			}
+		}
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_physics_deposit
+				}
+			}
+		}
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_engineering_deposit
+				}
+			}
+		}
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+
+	# Neighbors
+	neighbor_system = {
+		distance = { min = 10 max = @distance }
+		initializer = "b2_starting_system_legendary_neighbor"
+	}
+
+	neighbor_system = {
+		distance = { min = 10 max = @distance }	
+		initializer = "b2_starting_system_legendary_neighbor"
+	}
+
+	neighbor_system = {
+		distance = { min = 10 max = @distance }	
+		initializer = "b2_starting_system_legendary_neighbor"
+	}
+
+	neighbor_system = {
+		distance = { min = 10 max = 100 }	
+		initializer = "b2_starting_system_legendary_strategic_1"
+	}
+
+	neighbor_system = {
+		distance = { min = 10 max = 100 }	
+		initializer = "b2_starting_system_legendary_strategic_2"
+	}
+}
+
+##################################################################################
+b2_starting_system_legendary_neighbor = {
+	class = rl_standard_stars
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Star with Energy
+	planet = {
+		count = 1
+		class = star
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+
+	# Energy Planets
+	planet = {
+		count = 1
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 10 max = 15 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+
+	# Mineral Planets
+	planet = {
+		count = 3
+		class = random_non_colonizable
+		size = { min = 10 max = 20 }
+		orbit_distance = { min = 15 max = 25 }
+		orbit_angle = { min = 90 max = 270 }
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_mineral_deposit
+			}
+
+			add_modifier = {
+				modifier = "chthonian_planet"
+			}
+		}
+	}
+
+	# Ideal Colony
+	planet = {
+		count = 1
+		orbit_distance = { min = 20 max = 40 }
+		class = ideal_planet_class
+		orbit_angle = { min = 90 max = 270 }
+		size = 25
+
+		init_effect = {
+			make_legendary_colony = yes
+		}
+	}
+
+	# Science Gas Giant
+	planet = {
+		count = 3
+		class = pc_gas_giant
+		orbit_distance = { min = 40 max = 50 }
+		orbit_angle = { min = 90 max = 180 }
+		has_ring = yes
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_society_deposit
+				}
+			}
+		}
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_physics_deposit
+				}
+			}
+		}
+
+		moon = {
+			count = 2
+			class = random_non_colonizable
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = { min = 5 max = 9 }
+
+			init_effect = {
+				orbital_deposit_tile = {
+					set_deposit = d_immense_engineering_deposit
+				}
+			}
+		}
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_immense_energy_deposit
+			}
+		}
+	}
+}
+
+##################################################################################
+b2_starting_system_legendary_strategic_1 = {
+	class = sc_black_hole
+	asteroids_distance = 150
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Special Star
+	planet = {
+		count = 1
+		class = pc_black_hole
+		orbit_distance = 0
+		orbit_angle = 1
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_dark_matter_deposit
+			}
+		}
+	}
+
+	change_orbit = 150
+
+	# Garanthium Asteroid
+	planet = {
+		count = 1
+		class = random_asteroid
+		orbit_distance = 0
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_garanthium_deposit
+			}
+		}
+	}
+
+	# Yuranic Asteroid
+	planet = {
+		count = 1
+		class = random_asteroid
+		orbit_distance = 0
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_yuranic_deposit
+			}
+		}
+	}
+
+	# Engos Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_engos_deposit
+			}
+		}
+	}
+
+	# Lythuric Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_lythuric_gas_deposit
+			}
+		}
+	}
+
+	# Zro Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = rk_zro_deposit_force
+			}
+		}
+	}
+}
+
+##################################################################################
+b2_starting_system_legendary_strategic_2 = {
+	class = sc_neutron_star
+	asteroids_distance = 30
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+	}
+
+	# Special Star
+	planet = {
+		count = 1
+		class = pc_neutron_star
+		orbit_distance = 0
+		orbit_angle = 1
+
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_neutronium_deposit
+			}
+		}
+	}
+
+	# Orillium Asteroid
+	planet = {
+		count = 1
+		class = random_asteroid
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_orillium_deposit
+			}
+		}
+	}
+
+	# Teldar Asteroid
+	planet = {
+		count = 1
+		class = random_asteroid
+		orbit_distance = 0
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_teldar_deposit
+			}
+		}
+	}
+
+	# Terraforming Liquids Frozen World
+	planet = {
+		count = 1
+		class = pc_frozen
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_terraforming_fluid_deposit
+			}
+		}
+	}
+
+	# Terraforming Gasses Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_terraforming_gas_deposit
+			}
+		}
+	}
+
+	# Pitharan Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_pitharan_deposit
+			}
+		}
+	}
+
+	# Satramene Gas Giant
+	planet = {
+		count = 1
+		class = pc_gas_giant
+		orbit_distance = 30
+		init_effect = {
+			orbital_deposit_tile = {
+				set_deposit = d_satramene_deposit
+			}
+		}
+	}
+}

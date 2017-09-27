@@ -1,0 +1,25 @@
+// Balanced
+///////////////////////////////////
+
+Home System
+- 3 Energy
+- 3 Minerals
++ 25 Tile Homeworld
+
+Neighbor A1
+- 2 Energy
+- 2 Minerals
+
+Neighbor B1
+- 2 Physics
++ Ideal Colony
+
+Neighbor A2
+- 2 Energy
+- 2 Minerals
++ Ideal Colony
+
+Neighbor B2
+- 2 Minerals
+- 2 Engineering
+- 2 Society

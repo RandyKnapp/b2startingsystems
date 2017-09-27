@@ -1,0 +1,28 @@
+##################################################################################
+# Bravo2's Starting Systems - Effects
+##################################################################################
+
+make_legendary_colony = {
+	clear_blockers = yes
+
+	add_modifier = {
+		modifier = pm_ultra_rich
+		days = -1
+	}
+	add_modifier = {
+		modifier = "pm_low_gravity"
+		days = -1
+	}
+	add_modifier = {
+		modifier = pm_lush
+		days = -1
+	}
+	add_modifier = {
+		modifier = pm_strong_magnetic_field
+		days = -1
+	}
+	add_modifier = {
+		modifier = pm_natural_beauty
+		days = -1
+	}
+}
